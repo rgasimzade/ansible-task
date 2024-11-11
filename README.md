@@ -21,8 +21,8 @@ This project:
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository_url>
-cd wordpress_project
+git clone https://github.com/rgasimzade/ansible-task
+cd ansible-task
 ```
 
 ### 2. Configure the Inventory File
