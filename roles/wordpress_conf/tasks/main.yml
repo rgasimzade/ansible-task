@@ -1,0 +1,20 @@
+---
+- name: Pull WordPress Docker image
+  docker_image:
+    name: wordpress
+    tag: "latest"
+    source: pull
+
+- name: Create WordPress Docker container
+  docker_container:
+    name: wordpress
+    image: wordpress:latest
+    state: started
+    restart_policy: always
+    env:
+      WORDPRESS_DB_HOST: "<dbserver_ip>:3306"
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpressuser
+      WORDPRESS_DB_PASSWORD: wordpresspass
+    ports:
+      - "80:80"

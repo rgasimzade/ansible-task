@@ -1,0 +1,21 @@
+---
+- name: Setup Docker and deploy WordPress with MySQL
+  hosts: all
+  become: true
+
+  roles:
+    - docker_setup
+
+- name: Configure MySQL Database
+  hosts: db
+  become: true
+
+  roles:
+    - database_conf
+
+- name: Configure WordPress Application
+  hosts: web
+  become: true
+
+  roles:
+    - wordpress_conf

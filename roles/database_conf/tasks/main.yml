@@ -1,0 +1,26 @@
+---
+- name: Pull MySQL Docker image
+  docker_image:
+    name: mysql
+    tag: "latest"
+    source: pull
+
+- name: Create MySQL Docker container with health check
+  docker_container:
+    name: mysql-db
+    image: mysql:latest
+    state: started
+    restart_policy: always
+    env:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpressuser
+      MYSQL_PASSWORD: wordpresspass
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p{{ MYSQL_ROOT_PASSWORD }}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
